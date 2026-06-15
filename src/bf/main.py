@@ -29,6 +29,7 @@ async def main():
         await bot.load_extension('src.bf.commands.help')
         await bot.load_extension('src.bf.commands.fisch')
         await bot.load_extension('src.bf.commands.words')
+        await bot.load_extension('src.bf.commands.py_exec')
         await bot.start(token)
 
 
