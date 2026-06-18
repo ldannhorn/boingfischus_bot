@@ -1,10 +1,12 @@
 import discord
 from discord.ext import commands
 from pathlib import Path
+from typing import Mapping
 
 class Words(commands.Cog):
     bot: commands.Bot
     words: tuple[str, ...]
+    trans_map: Mapping[int, str]
 
     def __init__(self, bot: commands.Bot):
         self.bot = bot
@@ -22,9 +24,15 @@ class Words(commands.Cog):
             self.words = ()
             print(f'Failed to load word list: {e}')
 
+        self.trans_map = str.maketrans({
+            'ä': 'ae',
+            'ö': 'oe',
+            'ü': 'ue'
+        })
+
     
     def ex_wortmit(self, substr: str) -> tuple[str, ...]:
-        substr = substr.casefold()
+        substr = substr.casefold().translate(self.trans_map)
 
         matches = [word for word in self.words if substr in word]
 

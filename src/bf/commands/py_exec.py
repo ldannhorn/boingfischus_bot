@@ -142,7 +142,7 @@ class PyExec(commands.Cog):
             )
         except FileNotFoundError:
             return PythonRunResult(
-                'Docker executable was not found. Install Docker on the host running the bot.',
+                'Docker executable was not found.',
                 exit_code=None,
             )
 
@@ -195,7 +195,7 @@ class PyExec(commands.Cog):
 
     @commands.command(
         name='py',
-        description='Executes Python code.',
+        description='Führt Python-Code aus.',
     )
     async def py(self, ctx: commands.Context[commands.Bot], *, code: str) -> None:
         async with ctx.typing():
@@ -206,10 +206,10 @@ class PyExec(commands.Cog):
 
     @discord.app_commands.command(
         name='boing-py',
-        description='Executes Python code.',
+        description='Führt Python-Code aus.',
     )
     @discord.app_commands.describe(
-        code='Python code, optionally wrapped in a ```py code block.'
+        code='Python-Code, ggf. in ```py-Block.'
     )
     async def boingpy(self, interaction: discord.Interaction, code: str) -> None:
         await interaction.response.defer(thinking=True)
