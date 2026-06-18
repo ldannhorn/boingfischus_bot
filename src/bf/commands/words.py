@@ -9,6 +9,7 @@ class Words(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
+        # Word list is assumed to be casefolded!
         words_path = Path(__file__).parent.parent / 'resources' / 'words_de.txt'
         try:
             self.words = tuple(
@@ -23,7 +24,7 @@ class Words(commands.Cog):
 
     
     def ex_wortmit(self, substr: str) -> tuple[str, ...]:
-        substr = substr.lower()
+        substr = substr.casefold()
 
         matches = [word for word in self.words if substr in word]
 
